@@ -1,0 +1,20 @@
+{
+  "name": "crop-prediction-platform",
+  "version": "1.0.0",
+  "description": "Intelligent crop recommendation platform with ML, AI, and market intelligence",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd owner && npm run dev",
+    "client": "cd client && npm start",
+    "install-all": "npm install && cd owner && npm install && cd ../client && npm install",
+    "build": "cd client && npm run build",
+    "start": "cd owner && npm start"
+  },
+  "keywords": ["agriculture", "crop-prediction", "machine-learning", "ai", "farming"],
+  "author": "SIH Hackathon Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

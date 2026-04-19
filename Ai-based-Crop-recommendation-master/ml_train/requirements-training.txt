@@ -1,0 +1,5 @@
+# PlantVillage CNN training dependencies
+# Install in a venv: pip install -r requirements-training.txt
+tensorflow>=2.15.0,<2.19.0
+Pillow>=9.0.0
+numpy>=1.23.0

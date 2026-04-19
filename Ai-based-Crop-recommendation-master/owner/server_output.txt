@@ -1,0 +1,4 @@
+🚀 Server running on port 5000
+📊 Environment: development
+🌐 Frontend URL: http://localhost:3000
+📦 MongoDB Connected: localhost

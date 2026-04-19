@@ -1,0 +1,24 @@
+{
+  "num_classes": 4,
+  "val_accuracy": 0.4375,
+  "val_loss": 1.475,
+  "training_time_min": 0.6,
+  "phase1": {
+    "accuracy": [
+      0.203125,
+      0.25
+    ],
+    "val_accuracy": [
+      0.3125,
+      0.25
+    ]
+  },
+  "phase2": {
+    "accuracy": [
+      0.203125
+    ],
+    "val_accuracy": [
+      0.4375
+    ]
+  }
+}
