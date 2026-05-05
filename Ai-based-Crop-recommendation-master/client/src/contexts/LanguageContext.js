@@ -1,12 +1,13 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { nlpAPI } from '../services/api';
+import * as translations from '../i18n';
 
 const LanguageContext = createContext();
 
 const supportedLanguages = {
-  'en': { name: 'English', flag: '🇺🇸' },
-  'ta': { name: 'தமிழ்', flag: '🇮🇳' },
-  'ml': { name: 'മലയാളം', flag: '🇮🇳' }
+  'en': { name: 'English', flag: '🇺🇸', dir: 'ltr' },
+  'ta': { name: 'தமிழ்', flag: '🇮🇳', dir: 'ltr' },
+  'ml': { name: 'മലയാളം', flag: '🇮🇳', dir: 'ltr' }
 };
 
 export const LanguageProvider = ({ children }) => {
@@ -73,6 +74,27 @@ export const LanguageProvider = ({ children }) => {
     return supportedLanguages[currentLanguage] || supportedLanguages['en'];
   };
 
+  const t = useMemo(() => {
+    const langTranslations = translations[currentLanguage] || translations.en;
+    return (key, params = {}) => {
+      let text = langTranslations;
+      const keys = key.split('.');
+      for (const k of keys) {
+        text = text?.[k];
+        if (text === undefined) break;
+      }
+      if (!text) return key;
+
+      if (params && typeof params === 'object') {
+        Object.keys(params).forEach(param => {
+          const placeholder = `{{${param}}}`;
+          text = text.replace(new RegExp(placeholder.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&'), 'g'), params[param]);
+        });
+      }
+      return text;
+    };
+  }, [currentLanguage]);
+
   const value = {
     currentLanguage,
     supportedLanguages,
@@ -80,7 +102,8 @@ export const LanguageProvider = ({ children }) => {
     translate,
     translateRecommendations,
     getCropInfo,
-    getCurrentLanguageInfo
+    getCurrentLanguageInfo,
+    t
   };
 
   return (
@@ -96,4 +119,9 @@ export const useLanguage = () => {
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;
+};
+
+export const useTranslate = () => {
+  const { t } = useLanguage();
+  return t;
 };

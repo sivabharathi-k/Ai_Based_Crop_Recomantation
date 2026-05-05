@@ -1,0 +1,106 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "cropPrediction": "Crop Prediction",
+    "marketIntelligence": "Market Intelligence",
+    "history": "History",
+    "profile": "Profile"
+  },
+  "common": {
+    "logout": "Logout",
+    "saveChanges": "Save Changes",
+    "updatePassword": "Update Password",
+    "getStarted": "Get Started",
+    "signIn": "Sign In",
+    "startFreeTrial": "Start Free Trial"
+  },
+  "home": {
+    "hero": {
+      "title": "Intelligent Crop Recommendation Platform",
+      "subtitle": "Harness the power of AI and machine learning to optimize your farming decisions. Get personalized crop recommendations, disease detection, and market insights in your local language.",
+      "stats": {
+        "activeFarmers": "Active Farmers",
+        "predictionAccuracy": "Prediction Accuracy",
+        "cropTypes": "Crop Types Supported",
+        "languages": "Languages Available"
+      }
+    },
+    "features": {
+      "title": "Everything you need for smart farming",
+      "subtitle": "Our platform combines cutting-edge technology with agricultural expertise",
+      "aiPrediction": "AI-Powered Crop Prediction",
+      "aiDesc": "Get intelligent crop recommendations based on soil conditions, weather data, and market trends using advanced machine learning algorithms.",
+      "marketIntel": "Market Intelligence",
+      "marketDesc": "Access real-time market prices, demand forecasts, and profit potential analysis for informed decision making.",
+      "multiLang": "Multi-Language Support",
+      "multiLangDesc": "Available in 10+ local languages with voice-to-text and text-to-speech capabilities for better accessibility.",
+      "dataSecurity": "Data Security",
+      "securityDesc": "Your farm data is encrypted and stored securely with enterprise-grade security measures.",
+      "realTime": "Real-Time Insights",
+      "realtimeDesc": "Get instant recommendations and alerts based on current weather conditions and market trends."
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "subtitle": "Get started in three simple steps",
+      "step1": "Input Your Data",
+      "step1Desc": "Enter soil conditions, weather data, and location information",
+      "step2": "AI Analysis",
+      "step2Desc": "Our ML models analyze your data and market conditions",
+      "step3": "Get Recommendations",
+      "step3Desc": "Receive personalized crop suggestions with confidence scores"
+    },
+    "testimonials": {
+      "title": "What farmers are saying",
+      "subtitle": "Join thousands of satisfied farmers who trust CropAI"
+    },
+    "cta": {
+      "title": "Ready to transform your farming?",
+      "subtitle": "Join thousands of farmers who are already using AI to optimize their crops"
+    }
+  },
+  "profile": {
+    "title": "Profile Information",
+    "security": "Security",
+    "statistics": "Statistics",
+    "labels": {
+      "fullName": "Full Name",
+      "email": "Email",
+      "role": "Role",
+      "preferredLanguage": "Preferred Language",
+      "country": "Country",
+      "state": "State",
+      "city": "City",
+      "farmSize": "Farm Size (hectares)",
+      "farmingExperience": "Farming Experience (years)",
+      "currentCrops": "Current Crops (comma-separated)",
+      "soilTypes": "Soil Types (comma-separated)",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password"
+    },
+    "placeholders": {
+      "country": "Country",
+      "state": "State",
+      "city": "City",
+      "farmSize": "Farm size in hectares",
+      "experience": "Years of farming experience",
+      "crops": "Rice, Wheat, Maize",
+      "soils": "Sandy, Loamy, Clay"
+    },
+    "stats": {
+      "totalPredictions": "Total Predictions",
+      "daysActive": "Days Active",
+      "yearsExperience": "Years Experience",
+      "hectares": "Hectares",
+      "language": "Language",
+      "accountType": "Account Type"
+    }
+  },
+  "layout": {
+    "userGreeting": "CropAI"
+  },
+  "forms": {
+    "emailCannotChange": "Email cannot be changed",
+    "passwordsNotMatch": "New passwords do not match"
+  }
+}

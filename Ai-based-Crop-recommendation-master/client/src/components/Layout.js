@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage, useTranslate } from '../contexts/LanguageContext';
 import {
   Home,
   BarChart3,
@@ -19,15 +19,16 @@ const Layout = ({ children }) => {
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const { currentLanguage, supportedLanguages, changeLanguage, getCurrentLanguageInfo } = useLanguage();
+  const t = useTranslate();
   const location = useLocation();
   const navigate = useNavigate();
 
   const navigation = [
-    { name: 'Dashboard',          href: '/dashboard',  icon: Home      },
-    { name: 'Crop Prediction',    href: '/prediction', icon: BarChart3  },
-    { name: 'Market Intelligence',href: '/market',     icon: TrendingUp },
-    { name: 'History',            href: '/history',    icon: History    },
-    { name: 'Profile',            href: '/profile',    icon: User       },
+    { name: t('nav.dashboard'),          href: '/dashboard',  icon: Home      },
+    { name: t('nav.cropPrediction'),    href: '/prediction', icon: BarChart3  },
+    { name: t('nav.marketIntelligence'),href: '/market',     icon: TrendingUp },
+    { name: t('nav.history'),            href: '/history',    icon: History    },
+    { name: t('nav.profile'),            href: '/profile',    icon: User       },
   ];
 
   const handleLogout = async () => {
@@ -135,7 +136,7 @@ const Layout = ({ children }) => {
                 <Menu className="h-6 w-6" />
               </button>
               <h1 className="ml-2 text-lg font-semibold text-gray-900 lg:ml-0">
-                {navigation.find(item => isActive(item.href))?.name || 'CropAI'}
+                {navigation.find(item => isActive(item.href))?.name || t('layout.userGreeting')}
               </h1>
             </div>
 
@@ -178,8 +179,8 @@ const Layout = ({ children }) => {
                   onClick={handleLogout}
                   className="flex items-center space-x-1 text-sm text-gray-600 hover:text-gray-900"
                 >
-                  <LogOut className="h-4 w-4" />
-                  <span className="hidden sm:inline">Logout</span>
+                <LogOut className="h-4 w-4" />
+                  <span className="hidden sm:inline">{t('common.logout')}</span>
                 </button>
               </div>
             </div>

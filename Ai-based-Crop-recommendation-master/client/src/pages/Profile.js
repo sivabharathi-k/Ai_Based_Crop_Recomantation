@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { userAPI } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage, useTranslate } from '../contexts/LanguageContext';
 import LoadingSpinner from '../components/LoadingSpinner';
 import toast from 'react-hot-toast';
 
@@ -28,6 +28,7 @@ const Profile = () => {
   
   const { user, updateProfile, updatePassword } = useAuth();
   const { supportedLanguages, currentLanguage, changeLanguage } = useLanguage();
+  const t = useTranslate();
 
   // Fetch user profile data
   const { isLoading: profileLoading, refetch: refetchProfile } = useQuery(
@@ -92,9 +93,9 @@ const Profile = () => {
   };
 
   const tabs = [
-    { id: 'profile', name: 'Profile Information', icon: User },
-    { id: 'password', name: 'Security', icon: Settings },
-    { id: 'stats', name: 'Statistics', icon: CheckCircle }
+    { id: 'profile', name: t('profile.title'), icon: User },
+    { id: 'password', name: t('profile.security'), icon: Settings },
+    { id: 'stats', name: t('profile.statistics'), icon: CheckCircle }
   ];
 
   if (profileLoading || statsLoading) {
@@ -168,12 +169,12 @@ const Profile = () => {
             {/* Profile Information */}
             <div className="card">
               <div className="card-header">
-                <h2 className="text-xl font-semibold text-gray-900">Profile Information</h2>
+                <h2 className="text-xl font-semibold text-gray-900">{t('profile.title')}</h2>
               </div>
               <div className="card-body">
                 <form onSubmit={profileForm.handleSubmit(onProfileSubmit)} className="space-y-6">
                   <div>
-                    <label className="label">Full Name</label>
+                    <label className="label">{t('profile.labels.fullName')}</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <User className="h-5 w-5 text-gray-400" />
@@ -192,7 +193,7 @@ const Profile = () => {
                   </div>
 
                   <div>
-                    <label className="label">Email</label>
+                    <label className="label">{t('profile.labels.email')}</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Mail className="h-5 w-5 text-gray-400" />
@@ -208,7 +209,7 @@ const Profile = () => {
                   </div>
 
                   <div>
-                    <label className="label">Role</label>
+                    <label className="label">{t('profile.labels.role')}</label>
                     <input
                       type="text"
                       value={user?.role}
@@ -218,7 +219,7 @@ const Profile = () => {
                   </div>
 
                   <div>
-                    <label className="label">Preferred Language</label>
+                    <label className="label">{t('profile.labels.preferredLanguage')}</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Globe className="h-5 w-5 text-gray-400" />
@@ -246,7 +247,7 @@ const Profile = () => {
                       className="btn-primary flex-1"
                     >
                       <Save className="mr-2 h-4 w-4" />
-                      Save Changes
+                      {t('common.saveChanges')}
                     </button>
                   </div>
                 </form>
@@ -260,7 +261,7 @@ const Profile = () => {
                 <div className="card-header">
                   <h2 className="text-xl font-semibold text-gray-900 flex items-center">
                     <MapPin className="h-5 w-5 mr-2 text-blue-600" />
-                    Location
+                    {t('profile.labels.location') || 'Location'}
                   </h2>
                 </div>
                 <div className="card-body">
@@ -306,7 +307,7 @@ const Profile = () => {
                 <div className="card-body">
                   <form onSubmit={profileForm.handleSubmit(onProfileSubmit)} className="space-y-4">
                     <div>
-                      <label className="label">Farm Size (hectares)</label>
+                    <label className="label">{t('profile.labels.farmSize')}</label>
                       <input
                         type="number"
                         step="0.1"
@@ -316,7 +317,7 @@ const Profile = () => {
                       />
                     </div>
                     <div>
-                      <label className="label">Farming Experience (years)</label>
+                    <label className="label">{t('profile.labels.farmingExperience')}</label>
                       <input
                         type="number"
                         {...profileForm.register('farmDetails.farmingExperience')}
@@ -325,7 +326,7 @@ const Profile = () => {
                       />
                     </div>
                     <div>
-                      <label className="label">Current Crops (comma-separated)</label>
+                    <label className="label">{t('profile.labels.currentCrops')}</label>
                       <input
                         type="text"
                         {...profileForm.register('farmDetails.currentCrops')}
@@ -334,7 +335,7 @@ const Profile = () => {
                       />
                     </div>
                     <div>
-                      <label className="label">Soil Types (comma-separated)</label>
+                    <label className="label">{t('profile.labels.soilTypes')}</label>
                       <input
                         type="text"
                         {...profileForm.register('farmDetails.soilTypes')}
@@ -353,12 +354,12 @@ const Profile = () => {
           <div className="max-w-md mx-auto">
             <div className="card">
               <div className="card-header">
-                <h2 className="text-xl font-semibold text-gray-900">Change Password</h2>
+                <h2 className="text-xl font-semibold text-gray-900">{t('common.updatePassword')}</h2>
               </div>
               <div className="card-body">
                 <form onSubmit={passwordForm.handleSubmit(onPasswordSubmit)} className="space-y-6">
                   <div>
-                    <label className="label">Current Password</label>
+                    <label className="label">{t('profile.labels.currentPassword')}</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Eye className="h-5 w-5 text-gray-400" />
@@ -388,7 +389,7 @@ const Profile = () => {
                   </div>
 
                   <div>
-                    <label className="label">New Password</label>
+                    <label className="label">{t('profile.labels.newPassword')}</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Eye className="h-5 w-5 text-gray-400" />
@@ -421,7 +422,7 @@ const Profile = () => {
                   </div>
 
                   <div>
-                    <label className="label">Confirm New Password</label>
+                    <label className="label">{t('profile.labels.confirmPassword')}</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Eye className="h-5 w-5 text-gray-400" />

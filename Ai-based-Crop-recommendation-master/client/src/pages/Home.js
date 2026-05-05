@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslate } from '../contexts/LanguageContext';
 import {
   ArrowRight,
   BarChart3,
@@ -12,6 +13,7 @@ import {
 } from 'lucide-react';
 
 const Home = () => {
+  const t = useTranslate();
   const features = [
     {
       icon: BarChart3,
@@ -87,13 +89,10 @@ const Home = () => {
           <div className="text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                <span className="gradient-text">Intelligent Crop</span>
-                <br />
-                Recommendation Platform
+                <span className="gradient-text">{t('home.hero.title', { highlight: 'Intelligent Crop' })}</span>
               </h1>
               <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
-                Harness the power of AI and machine learning to optimize your farming decisions.
-                Get personalized crop recommendations, disease detection, and market insights in your local language.
+                {t('home.hero.subtitle')}
               </p>
             </motion.div>
 
@@ -131,8 +130,8 @@ const Home = () => {
       <section className="py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">Everything you need for smart farming</h2>
-            <p className="mt-4 text-lg text-gray-600">Our platform combines cutting-edge technology with agricultural expertise</p>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('home.features.title')}</h2>
+            <p className="mt-4 text-lg text-gray-600">{t('home.features.subtitle')}</p>
           </div>
           <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, index) => {

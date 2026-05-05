@@ -12,6 +12,7 @@ import {
   AlertCircle,
   CheckCircle
 } from 'lucide-react';
+import { useTranslate } from '../contexts/LanguageContext';
 import { predictionAPI, marketAPI } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -29,6 +30,7 @@ const formatTimeAgo = (dateString) => {
 };
 
 const Dashboard = () => {
+  const t = useTranslate();
   const { data: statsRes, isLoading: predictionLoading } = useQuery(
     'predictionStats',
     predictionAPI.getStats,
@@ -91,10 +93,12 @@ const Dashboard = () => {
         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
         className="gradient-bg rounded-2xl p-8 text-white"
       >
-        <h1 className="text-3xl font-bold mb-2">Welcome to your Smart Farm Dashboard</h1>
+
+        <h1 className="text-3xl font-bold mb-2">{t('dashboard.welcomeTitle')}</h1>
         <p className="text-lg opacity-90">
-          Monitor your crops, analyze market trends, and make data-driven decisions
+          {t('dashboard.welcomeSubtitle')}
         </p>
+
       </motion.div>
 
       {/* Stats */}
@@ -108,7 +112,9 @@ const Dashboard = () => {
             <div className="flex items-center">
               <BarChart3 className="h-8 w-8 text-primary-600" />
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Total Predictions</p>
+
+                <p className="text-sm font-medium text-gray-500">{t('dashboard.stats.totalPredictions')}</p>
+
                 <p className="text-2xl font-semibold text-gray-900">
                   {stats?.overview?.totalPredictions ?? 0}
                 </p>
