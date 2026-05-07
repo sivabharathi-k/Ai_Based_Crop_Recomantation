@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { authAPI } from '../services/api';
+import { authAPI, userAPI } from '../services/api';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
@@ -168,7 +168,7 @@ export const AuthProvider = ({ children }) => {
 
   const updateProfile = async (profileData) => {
     try {
-      const response = await authAPI.updateProfile(profileData);
+      const response = await userAPI.updateProfile(profileData);
       dispatch({
         type: 'UPDATE_USER',
         payload: response.data.user

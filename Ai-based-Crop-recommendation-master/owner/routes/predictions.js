@@ -104,14 +104,67 @@ async function fetchWeatherByCoords(lat, lon) {
 /**
  * Resolve city name -> lat/lon using OWM Geocoding API.
  */
-async function geocodeCity(city) {
-  const res = await axios.get(`${GEO_BASE}/direct`, {
-    params: { q: city, limit: 1, appid: WEATHER_APIKEY },
-    timeout: 8000,
-  });
-  if (!res.data?.length) throw new Error(`City not found: "${city}"`);
-  const { lat, lon, name, country } = res.data[0];
-  return { lat, lon, name, country };
+async function geocodeCity(inputCity) {
+  const citiesToTry = [];
+  
+  // Normalize input
+  let city = inputCity.trim();
+  if (!city) throw new Error('City name required');
+
+  // 1. Original (trimmed)
+  citiesToTry.push(city);
+  
+  // 2. Remove commas, trim extra spaces
+  city = city.replace(/,/g, '').trim();
+  citiesToTry.push(city);
+  
+  // 3. Last part after comma (district/village → city)
+  const parts = inputCity.split(',').map(p => p.trim()).filter(Boolean);
+  if (parts.length > 1) {
+    citiesToTry.push(parts[parts.length - 1]);  // Last part (city)
+    if (parts.length > 2) citiesToTry.push(parts[1]); // Middle if exists
+    citiesToTry.push(parts[0]); // First part fallback
+  }
+  
+  // 4. Add India suffix for better Indian results
+  citiesToTry.push(`${city},IN`);
+  if (parts.length > 1) citiesToTry.push(`${parts[parts.length - 1]},IN`);
+  
+  console.log('[Geocode] Trying cities:', citiesToTry);
+
+  let bestMatch = null;
+  for (const tryCity of citiesToTry) {
+    try {
+      const res = await axios.get(`${GEO_BASE}/direct`, {
+        params: { q: tryCity, limit: 5, appid: WEATHER_APIKEY },
+        timeout: 5000,
+      });
+      
+      if (res.data?.length) {
+        // Prefer India matches
+  const indiaMatch = res.data.find(loc => loc.country === 'IN');
+        bestMatch = indiaMatch || res.data[0];
+        console.log(`[Geocode] Found "${bestMatch.name}" (${bestMatch.country}) for "${tryCity}"`);
+        break;
+      }
+    } catch (err) {
+      console.warn(`[Geocode] Failed "${tryCity}":`, err.response?.status || err.message);
+    }
+  }
+
+  if (!bestMatch) {
+    const suggestions = citiesToTry.slice(0,3).map(c => `"${c}"`).join(', ');
+    throw new Error(`Location not found. Try nearby major city like "Nagapattinam" or "${suggestions}".`);
+  }
+
+  return {
+    lat: parseFloat(bestMatch.lat),
+    lon: parseFloat(bestMatch.lon),
+    name: bestMatch.name,
+    country: bestMatch.country,
+    state: bestMatch.state || '',
+    suggestions: []
+  };
 }
 
 // @desc    Get crop prediction

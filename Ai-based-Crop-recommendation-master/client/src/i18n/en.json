@@ -74,6 +74,7 @@
       "farmingExperience": "Farming Experience (years)",
       "currentCrops": "Current Crops (comma-separated)",
       "soilTypes": "Soil Types (comma-separated)",
+      "location": "Location",
       "currentPassword": "Current Password",
       "newPassword": "New Password",
       "confirmPassword": "Confirm New Password"
@@ -94,6 +95,13 @@
       "hectares": "Hectares",
       "language": "Language",
       "accountType": "Account Type"
+    }
+  },
+  "dashboard": {
+    "welcomeTitle": "Welcome to CropAI 🌱",
+    "welcomeSubtitle": "Get AI-powered crop recommendations, market insights, and more.",
+    "stats": {
+      "totalPredictions": "Total Predictions"
     }
   },
   "layout": {
